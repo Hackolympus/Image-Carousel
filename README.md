@@ -1,0 +1,1 @@
+This is the image carousel component for the Jeff's List website.

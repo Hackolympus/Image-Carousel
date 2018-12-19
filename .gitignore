@@ -1,0 +1,4 @@
+# Excess
+node_modules/
+# Private information
+server/config.js 
