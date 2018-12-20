@@ -1,13 +1,14 @@
-var mongoose = require("mongoose");
-var mongoUri = "mongodb://localhost/image-carousel";
+var mysql = require('mysql');
+var mysqlConfig = require('../config.js').mysqlConfig;
 
-mongoose.connect(mongoUri);
+var connection = mysql.createConnection(mysqlConfig);
 
-var db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
-  console.log("Connected to database");
+connection.connect((err) => {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('Successfully connected to database.')
 });
 
-module.exports.db = db;
+module.exports = connection;
