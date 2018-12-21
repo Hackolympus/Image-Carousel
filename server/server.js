@@ -11,7 +11,7 @@ var app = express();
 // Attach middleware:
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../react-client/dist')));
-//app.use(morgan) figure out how to do this
-app.use('/api/', Router);
+app.use(morgan('dev'));
+app.use('/listing', Router);
 
 module.exports = app;
