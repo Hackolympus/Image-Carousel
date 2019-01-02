@@ -63,6 +63,18 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
+	var _images = __webpack_require__(/*! ./components/images.jsx */ 211);
+	
+	var _images2 = _interopRequireDefault(_images);
+	
+	var _video = __webpack_require__(/*! ./components/video.jsx */ 212);
+	
+	var _video2 = _interopRequireDefault(_video);
+	
+	var _mainImage = __webpack_require__(/*! ./components/mainImage.jsx */ 213);
+	
+	var _mainImage2 = _interopRequireDefault(_mainImage);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -99,11 +111,13 @@
 	        console.log(response.data);
 	        _this2.setState({
 	          id: response.data.id,
-	          images: [response.data.image1Url, response.data.image2Url, response.data.image3Url, response.data.image4Url, response.data.image5Url, response.data.image6Url],
+	          images: [response.data.image1Url, response.data.image2Url, response.data.image3Url, response.data.image4Url, response.data.image5Url, response.data.image6Url
+	          //iterate through the response data instead
+	          ],
 	          videoUrl: response.data.videoUrl
-	        });
+	        }); //or do conditional rendering based on values!!!!
 	      }).catch(function (err) {
-	        console.log('Error populating images in client: ', err);
+	        console.log("Error populating images in client: ", err);
 	      });
 	    }
 	  }, {
@@ -126,11 +140,13 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { id: "image-carousel" },
-	        this.state.images.map(function (img) {
-	          return _react2.default.createElement("img", { src: img, key: img });
-	        }),
-	        _react2.default.createElement("iframe", { src: this.state.videoUrl, frameborder: "0", key: this.state.videoUrl,
-	          allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true })
+	        _react2.default.createElement(
+	          "div",
+	          { id: "thumbnail-bar" },
+	          _react2.default.createElement(_images2.default, { images: this.state.images }),
+	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl })
+	        ),
+	        _react2.default.createElement(_mainImage2.default, null)
 	      );
 	    }
 	  }]);
@@ -24225,6 +24241,174 @@
 	  };
 	};
 
+
+/***/ }),
+/* 210 */,
+/* 211 */
+/*!************************************************!*\
+  !*** ./react-client/src/components/images.jsx ***!
+  \************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Images = function Images(props) {
+	  if (props.images[5]) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "images" },
+	      props.images.map(function (img) {
+	        return _react2.default.createElement("img", { src: img, key: img });
+	      })
+	    );
+	  } else if (props.images[4]) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "images" },
+	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
+	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
+	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] }),
+	      _react2.default.createElement("img", { src: props.images[3], key: props.images[3] }),
+	      _react2.default.createElement("img", { src: props.images[4], key: props.images[4] })
+	    );
+	  } else if (props.images[3]) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "images" },
+	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
+	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
+	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] }),
+	      _react2.default.createElement("img", { src: props.images[3], key: props.images[3] })
+	    );
+	  } else if (props.images[2]) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "images" },
+	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
+	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
+	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] })
+	    );
+	  } else if (props.images[1]) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "images" },
+	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
+	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] })
+	    );
+	  }
+	  return _react2.default.createElement(
+	    "div",
+	    { id: "images" },
+	    _react2.default.createElement("img", { src: props.images[0], key: props.images[0] })
+	  );
+	};
+	
+	exports.default = Images;
+
+/***/ }),
+/* 212 */
+/*!***********************************************!*\
+  !*** ./react-client/src/components/video.jsx ***!
+  \***********************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Video = function Video(props) {
+	  if (props.video) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "video" },
+	      _react2.default.createElement("iframe", {
+	        src: props.video,
+	        key: props.video
+	      })
+	    );
+	  } //consider using a thumbnail instead of an iframe
+	  return _react2.default.createElement("div", { id: "video" });
+	};
+	
+	exports.default = Video;
+
+/***/ }),
+/* 213 */
+/*!***************************************************!*\
+  !*** ./react-client/src/components/mainImage.jsx ***!
+  \***************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MainImage = function (_React$Component) {
+	    _inherits(MainImage, _React$Component);
+	
+	    function MainImage(props) {
+	        _classCallCheck(this, MainImage);
+	
+	        var _this = _possibleConstructorReturn(this, (MainImage.__proto__ || Object.getPrototypeOf(MainImage)).call(this, props));
+	
+	        _this.state = {};
+	        return _this;
+	    }
+	
+	    _createClass(MainImage, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {}
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { id: "main-image" },
+	                _react2.default.createElement("img", { src: "https://media4.s-nbcnews.com/i/newscms/2018_11/1324333/corgi-fat-shame-today-180313-tease1_dd38fd2e279cadd6eadd7b45b1473e12.jpg" })
+	            );
+	        }
+	    }]);
+	
+	    return MainImage;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = MainImage;
 
 /***/ })
 /******/ ]);
