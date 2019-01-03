@@ -14,7 +14,7 @@ class App extends React.Component {
       videoUrl: null,
       currentListing: null,
       currentSelect: null,
-      currentSelectType: "image"
+      currentSelectType: null
     };
     this.populateImages = this.populateImages.bind(this);
     this.getRandomNumber = this.getRandomNumber.bind(this);
@@ -52,7 +52,8 @@ class App extends React.Component {
           id: response.data.id,
           images: responseImages,
           videoUrl: response.data.videoUrl,
-          currentSelect: response.data.image1Url
+          currentSelect: response.data.image1Url,
+          currentSelectType: "image"
         }); //or do conditional rendering based on values!!!!
       })
       .catch(err => {
