@@ -27,22 +27,22 @@ class App extends React.Component {
       .then(response => {
         var responseImages = [];
         function populateImageArray() {
-          if(response.data.image1Url !== null) {
+          if (response.data.image1Url !== null) {
             responseImages.push(response.data.image1Url);
           }
-          if(response.data.image2Url !== null) {
+          if (response.data.image2Url !== null) {
             responseImages.push(response.data.image2Url);
           }
-          if(response.data.image3Url !== null) {
+          if (response.data.image3Url !== null) {
             responseImages.push(response.data.image3Url);
           }
-          if(response.data.image4Url !== null) {
+          if (response.data.image4Url !== null) {
             responseImages.push(response.data.image4Url);
           }
-          if(response.data.image5Url !== null) {
+          if (response.data.image5Url !== null) {
             responseImages.push(response.data.image5Url);
           }
-          if(response.data.image6Url !== null) {
+          if (response.data.image6Url !== null) {
             responseImages.push(response.data.image6Url);
           }
         }
@@ -61,7 +61,8 @@ class App extends React.Component {
       });
   }
 
-  getRandomNumber() { //to get a random listing 1-100, not to be used in production
+  getRandomNumber() {
+    //to get a random listing 1-100, not to be used in production
     return Math.floor(Math.random() * 100) + 1;
   }
 
@@ -70,9 +71,12 @@ class App extends React.Component {
       currentSelect: e.target.src
     });
     if (e.target.id === "video-thumbnail") {
-      this.setState({currentSelectType: "video", currentSelect: this.state.videoUrl});
-    } else if(e.target.tagName === "IMG") {
-      this.setState({currentSelectType: "image"});
+      this.setState({
+        currentSelectType: "video",
+        currentSelect: this.state.videoUrl
+      });
+    } else if (e.target.tagName === "IMG") {
+      this.setState({ currentSelectType: "image" });
     }
   }
 
@@ -86,10 +90,15 @@ class App extends React.Component {
     return (
       <div id="image-carousel">
         <div id="thumbnail-bar">
-          <Images images={this.state.images} onMouseOver={this.onMouseOver}/>
-          <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver}/>
+          <Images images={this.state.images} onMouseOver={this.onMouseOver} />
+          <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver} />
+          {/* Instead of a single function, should I create two (specific to the type?) */}
         </div>
-        <MainFrame currentSelect={this.state.currentSelect} currentSelectType={this.state.currentSelectType} video={this.state.videoUrl}/>
+        <MainFrame
+          currentSelect={this.state.currentSelect}
+          currentSelectType={this.state.currentSelectType}
+          video={this.state.videoUrl}
+        />
       </div>
     );
   }

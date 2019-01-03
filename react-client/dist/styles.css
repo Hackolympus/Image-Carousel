@@ -35,16 +35,16 @@
 }
 
 .main-video {
-    max-width:300px;
-    max-height:200px;
-    min-width:300px;
-    min-height:200px;
+    max-width:320px;
+    max-height:180px;
+    min-width:320px;
+    min-height:180px;
 }
 
 .main-image {
-    max-width:300px;
+    max-width:320px;
     max-height:300px;
-    min-width:300px;
+    min-width:320px;
     min-height:300px;
 }
 
@@ -52,7 +52,7 @@
     display: none;
 }
 
-.hidden {
+.hidden-media {
     width: 0;
     height: 0;
     border: none;

@@ -158,7 +158,10 @@
 	        currentSelect: e.target.src
 	      });
 	      if (e.target.id === "video-thumbnail") {
-	        this.setState({ currentSelectType: "video", currentSelect: this.state.videoUrl });
+	        this.setState({
+	          currentSelectType: "video",
+	          currentSelect: this.state.videoUrl
+	        });
 	      } else if (e.target.tagName === "IMG") {
 	        this.setState({ currentSelectType: "image" });
 	      }
@@ -184,7 +187,11 @@
 	          _react2.default.createElement(_images2.default, { images: this.state.images, onMouseOver: this.onMouseOver }),
 	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl, onMouseOver: this.onMouseOver })
 	        ),
-	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType, video: this.state.videoUrl })
+	        _react2.default.createElement(_mainFrame2.default, {
+	          currentSelect: this.state.currentSelect,
+	          currentSelectType: this.state.currentSelectType,
+	          video: this.state.videoUrl
+	        })
 	      );
 	    }
 	  }]);
@@ -24305,11 +24312,18 @@
 	    "div",
 	    { id: "images" },
 	    props.images.map(function (img) {
-	      return _react2.default.createElement("img", { src: img, onMouseEnter: function onMouseEnter(e) {
+	      return _react2.default.createElement("img", {
+	        src: img,
+	        onMouseEnter: function onMouseEnter(e) {
 	          return props.onMouseOver(e);
-	        }, alt: "thumbnail image " + imgNum, key: "thumbnail_" + imgNum++ });
+	        },
+	        alt: "thumbnail image " + imgNum,
+	        key: "thumbnail_" + imgNum++
+	      });
 	    })
-	  );
+	  )
+	  //iterate through response-given images.
+	  ;
 	};
 	
 	exports.default = Images;
@@ -24324,7 +24338,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(/*! react */ 1);
@@ -24334,22 +24348,24 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Video = function Video(props) {
-	    if (props.video) {
-	        return _react2.default.createElement(
-	            "div",
-	            { id: "video" },
-	            _react2.default.createElement("img", {
-	                id: "video-thumbnail",
-	                src: "https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png",
-	                onMouseEnter: function onMouseEnter(e) {
-	                    return props.onMouseOver(e);
-	                },
-	                key: "thumbnail_video",
-	                alt: "Video Thumbnail"
-	            })
-	        );
-	    } //consider using a thumbnail instead of an iframe
-	    return _react2.default.createElement("div", { id: "video" });
+	  if (props.video) {
+	    return _react2.default.createElement(
+	      "div",
+	      { id: "video" },
+	      _react2.default.createElement("img", {
+	        id: "video-thumbnail",
+	        src: "https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png",
+	        onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        },
+	        key: "thumbnail_video",
+	        alt: "Video Thumbnail"
+	      })
+	    );
+	  }
+	  return _react2.default.createElement("div", { id: "video" });
+	  //If video is null then don't display the thumbnail.
+	  //should add onclick functionality for a modal video
 	};
 	
 	exports.default = Video;
@@ -24398,10 +24414,36 @@
 	    _this.state = {
 	      isHovered: false
 	    };
+	    _this.checkCurrentSelect = _this.checkCurrentSelect.bind(_this);
 	    return _this;
 	  }
 	
 	  _createClass(MainFrame, [{
+	    key: "checkCurrentSelect",
+	    value: function checkCurrentSelect() {
+	      if (this.props.currentSelectType === "image") {
+	        return _react2.default.createElement(_reactImageMagnify2.default, _extends({
+	          imageClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
+	          enlargedImageContainerClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
+	          fadeDurationInMs: 0,
+	          hoverDelayInMs: 0,
+	          style: { cursor: "default" }
+	        }, {
+	          smallImage: {
+	            height: 300,
+	            alt: "Main image media",
+	            width: 320,
+	            src: this.props.currentSelect
+	          },
+	          largeImage: {
+	            src: this.props.currentSelect,
+	            width: 1200,
+	            height: 1800
+	          }
+	        }));
+	      }
+	    }
+	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {}
 	  }, {
@@ -24415,7 +24457,7 @@
 	        _react2.default.createElement(
 	          "div",
 	          {
-	            className: this.props.currentSelectType === "image" ? "main-image" : "hidden",
+	            className: this.props.currentSelectType === "image" ? "main-image" : "hidden-media",
 	            onMouseEnter: function onMouseEnter() {
 	              return _this2.setState({ isHovered: true });
 	            },
@@ -24423,37 +24465,21 @@
 	              return _this2.setState({ isHovered: false });
 	            }
 	          },
-	          _react2.default.createElement(_reactImageMagnify2.default, _extends({
-	            imageClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
-	            enlargedImageContainerClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
-	            fadeDurationInMs: 0,
-	            hoverDelayInMs: 0,
-	            style: { cursor: "default" }
-	          }, {
-	            smallImage: {
-	              height: 300,
-	              alt: "Main Image",
-	              width: 300,
-	              src: this.props.currentSelect
-	            },
-	            largeImage: {
-	              src: this.props.currentSelect,
-	              width: 1200,
-	              height: 1800
-	            }
-	          }))
+	          this.checkCurrentSelect()
 	        ),
 	        _react2.default.createElement(
 	          "p",
 	          {
 	            className: this.props.currentSelectType === "image" ? "main-image-info" : "main-image-info-hidden"
 	          },
-	          this.state.isHovered === true ? "Click image to open expanded view" : "Roll over image to zoom in"
+	          this.state.isHovered === true ? "Click image to open expanded view" //still need to add this modal
+	          : "Roll over image to zoom in"
 	        ),
 	        _react2.default.createElement("iframe", {
-	          className: this.props.currentSelectType === "image" ? "hidden" : "main-video",
+	          className: this.props.currentSelectType === "image" ? "hidden-media" : "main-video",
 	          src: this.props.video,
-	          frameBorder: "0"
+	          frameBorder: "0",
+	          alt: "Main video media"
 	        })
 	      );
 	    }
