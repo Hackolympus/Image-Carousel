@@ -111,11 +111,32 @@
 	      var _this2 = this;
 	
 	      _axios2.default.get("/listing/" + this.state.currentListing).then(function (response) {
+	        var responseImages = [];
+	        function populateImageArray() {
+	          if (response.data.image1Url !== null) {
+	            responseImages.push(response.data.image1Url);
+	          }
+	          if (response.data.image2Url !== null) {
+	            responseImages.push(response.data.image2Url);
+	          }
+	          if (response.data.image3Url !== null) {
+	            responseImages.push(response.data.image3Url);
+	          }
+	          if (response.data.image4Url !== null) {
+	            responseImages.push(response.data.image4Url);
+	          }
+	          if (response.data.image5Url !== null) {
+	            responseImages.push(response.data.image5Url);
+	          }
+	          if (response.data.image6Url !== null) {
+	            responseImages.push(response.data.image6Url);
+	          }
+	        }
+	        populateImageArray();
+	        //could instead reformat the database to seperate the response image data.
 	        _this2.setState({
 	          id: response.data.id,
-	          images: [response.data.image1Url, response.data.image2Url, response.data.image3Url, response.data.image4Url, response.data.image5Url, response.data.image6Url
-	          //iterate through the response data instead
-	          ],
+	          images: responseImages,
 	          videoUrl: response.data.videoUrl,
 	          currentSelect: response.data.image1Url
 	        }); //or do conditional rendering based on values!!!!
@@ -162,18 +183,7 @@
 	          _react2.default.createElement(_images2.default, { images: this.state.images, onMouseOver: this.onMouseOver }),
 	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl, onMouseOver: this.onMouseOver })
 	        ),
-	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType }),
-	        _react2.default.createElement(
-	          "div",
-	          { id: "myModal", "class": "modal" },
-	          _react2.default.createElement(
-	            "span",
-	            { "class": "close" },
-	            "\xD7"
-	          ),
-	          _react2.default.createElement("img", { "class": "modal-content", id: "img01" }),
-	          _react2.default.createElement("div", { id: "caption" })
-	        )
+	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType })
 	      );
 	    }
 	  }]);
@@ -24289,96 +24299,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Images = function Images(props) {
-	  if (props.images[5]) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "images" },
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[0] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[1] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[2] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[3] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[4] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[5] })
-	    );
-	  } else if (props.images[4]) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "images" },
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[0] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[1] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[2] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[3] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[4] })
-	    );
-	  } else if (props.images[3]) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "images" },
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[0] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[1] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[2] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[3] })
-	    );
-	  } else if (props.images[2]) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "images" },
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[0] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[1] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[2] })
-	    );
-	  } else if (props.images[1]) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "images" },
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[0] }),
-	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
-	          return props.onMouseOver(e);
-	        }, src: props.images[1] })
-	    );
-	  }
+	
 	  return _react2.default.createElement(
 	    "div",
 	    { id: "images" },
-	    _react2.default.createElement("img", { onMouseEnter: props.onMouseOver, src: props.images[0] })
+	    props.images.map(function (img) {
+	      return _react2.default.createElement("img", { src: img, onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        } });
+	    })
 	  );
 	};
 	
@@ -24496,6 +24425,7 @@
 	          )
 	        );
 	      } else if (this.props.currentSelectType === "video") {
+	        //instead of else if make it so the video is default on hidden and only unhidden when the if statement is in effect.
 	        return _react2.default.createElement(
 	          "div",
 	          { id: "main-frame" },

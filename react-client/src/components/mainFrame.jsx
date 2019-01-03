@@ -27,6 +27,7 @@ class MainFrame extends React.Component {
         </div>
       );
     } else if (this.props.currentSelectType === "video") {
+    //instead of else if make it so the video is default on hidden and only unhidden when the if statement is in effect.
       return (
         <div id="main-frame">
           <iframe src={this.props.currentSelect} frameBorder="0" />

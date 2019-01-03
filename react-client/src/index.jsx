@@ -25,17 +25,32 @@ class App extends React.Component {
     axios
       .get(`/listing/${this.state.currentListing}`)
       .then(response => {
+        var responseImages = [];
+        function populateImageArray() {
+          if(response.data.image1Url !== null) {
+            responseImages.push(response.data.image1Url);
+          }
+          if(response.data.image2Url !== null) {
+            responseImages.push(response.data.image2Url);
+          }
+          if(response.data.image3Url !== null) {
+            responseImages.push(response.data.image3Url);
+          }
+          if(response.data.image4Url !== null) {
+            responseImages.push(response.data.image4Url);
+          }
+          if(response.data.image5Url !== null) {
+            responseImages.push(response.data.image5Url);
+          }
+          if(response.data.image6Url !== null) {
+            responseImages.push(response.data.image6Url);
+          }
+        }
+        populateImageArray();
+        //could instead reformat the database to seperate the response image data.
         this.setState({
           id: response.data.id,
-          images: [
-            response.data.image1Url,
-            response.data.image2Url,
-            response.data.image3Url,
-            response.data.image4Url,
-            response.data.image5Url,
-            response.data.image6Url
-            //iterate through the response data instead
-          ],
+          images: responseImages,
           videoUrl: response.data.videoUrl,
           currentSelect: response.data.image1Url
         }); //or do conditional rendering based on values!!!!
@@ -74,11 +89,11 @@ class App extends React.Component {
           <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver}/>
         </div>
         <MainFrame currentSelect={this.state.currentSelect} currentSelectType={this.state.currentSelectType}/>
-        <div id="myModal" class="modal">
+        {/* <div id="myModal" class="modal">
           <span class="close">&times;</span>
           <img class="modal-content" id="img01"></img>
           <div id="caption"></div>
-        </div>
+        </div> */}
       </div>
     );
   }
