@@ -40,9 +40,9 @@ class MainFrame extends React.Component {
           style={{cursor: "default"}}
           {...{
             smallImage: {
-              height: 318,
+              height: 300,
               alt: "Main Image",
-              width: 565,
+              width: 300,
               src: this.props.currentSelect
             },
             largeImage: {
