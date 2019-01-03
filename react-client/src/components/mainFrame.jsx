@@ -9,49 +9,46 @@ class MainFrame extends React.Component {
     };
   }
 
-  componentDidMount() {
-    //could mount the iframe video and hide it here for refactoring but skipping for now.
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <div id="main-frame">
-        <div className={
-            this.props.currentSelectType === "image"
-              ? "main-image"
-              : "hidden"
+        <div
+          className={
+            this.props.currentSelectType === "image" ? "main-image" : "hidden"
           }
           onMouseEnter={() => this.setState({ isHovered: true })}
           onMouseLeave={() => this.setState({ isHovered: false })}
-          >
-        <ReactImageMagnify 
-        imageClassName={
-            this.props.currentSelectType === "image"
-              ? "main-image"
-              : "main-image-hidden"
-          }
-        enlargedImageContainerClassName={
-            this.props.currentSelectType === "image"
-              ? "main-image"
-              : "main-image-hidden"
-          }
-          fadeDurationInMs={0}
-          hoverDelayInMs={0}
-          style={{cursor: "default"}}
-          {...{
-            smallImage: {
-              height: 300,
-              alt: "Main Image",
-              width: 300,
-              src: this.props.currentSelect
-            },
-            largeImage: {
-              src: this.props.currentSelect,
-              width: 1200,
-              height: 1800
+        >
+          <ReactImageMagnify
+            imageClassName={
+              this.props.currentSelectType === "image"
+                ? "main-image"
+                : "main-image-hidden"
             }
-          }}
-        />
+            enlargedImageContainerClassName={
+              this.props.currentSelectType === "image"
+                ? "main-image"
+                : "main-image-hidden"
+            }
+            fadeDurationInMs={0}
+            hoverDelayInMs={0}
+            style={{ cursor: "default" }}
+            {...{
+              smallImage: {
+                height: 300,
+                alt: "Main Image",
+                width: 300,
+                src: this.props.currentSelect
+              },
+              largeImage: {
+                src: this.props.currentSelect,
+                width: 1200,
+                height: 1800
+              }
+            }}
+          />
         </div>
         <p
           className={
@@ -61,15 +58,13 @@ class MainFrame extends React.Component {
           }
         >
           {this.state.isHovered === true
-            ? "Click image to open expanded view (not implemented yet)"
+            ? "Click image to open expanded view"
             : "Roll over image to zoom in"}
         </p>
-        
+
         <iframe
           className={
-            this.props.currentSelectType === "image"
-              ? "hidden"
-              : "main-video"
+            this.props.currentSelectType === "image" ? "hidden" : "main-video"
           }
           src={this.props.video}
           frameBorder="0"
@@ -80,5 +75,3 @@ class MainFrame extends React.Component {
 }
 
 export default MainFrame;
-//was testing out some stuff but as of now this can be stateless
-//find a way to make this work for both images and for iframes or find a new way to display videos.

@@ -24403,9 +24403,7 @@
 	
 	  _createClass(MainFrame, [{
 	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      //could mount the iframe video and hide it here for refactoring but skipping for now.
-	    }
+	    value: function componentDidMount() {}
 	  }, {
 	    key: "render",
 	    value: function render() {
@@ -24416,7 +24414,8 @@
 	        { id: "main-frame" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: this.props.currentSelectType === "image" ? "main-image" : "hidden",
+	          {
+	            className: this.props.currentSelectType === "image" ? "main-image" : "hidden",
 	            onMouseEnter: function onMouseEnter() {
 	              return _this2.setState({ isHovered: true });
 	            },
@@ -24449,7 +24448,7 @@
 	          {
 	            className: this.props.currentSelectType === "image" ? "main-image-info" : "main-image-info-hidden"
 	          },
-	          this.state.isHovered === true ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in"
+	          this.state.isHovered === true ? "Click image to open expanded view" : "Roll over image to zoom in"
 	        ),
 	        _react2.default.createElement("iframe", {
 	          className: this.props.currentSelectType === "image" ? "hidden" : "main-video",
@@ -24464,8 +24463,6 @@
 	}(_react2.default.Component);
 	
 	exports.default = MainFrame;
-	//was testing out some stuff but as of now this can be stateless
-	//find a way to make this work for both images and for iframes or find a new way to display videos.
 
 /***/ }),
 /* 213 */,
