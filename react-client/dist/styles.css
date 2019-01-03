@@ -8,8 +8,6 @@
 
 #main-frame {
     float: left;
-    display: inline-block;
-    overflow: hidden;
 }
 
 #thumbnail-bar img {
@@ -31,20 +29,41 @@
     box-shadow: 1px 1px 1px #fa7a1ec9;
 }
 
-#main-frame iframe, img {
-    display: block;
-    max-width:581px;
-    max-height:335px;
-    min-width:581px;
-    min-height:335px;
-    width: auto;
-    height: auto;
-    margin-left: 10px;
-}
-
-#main-frame p {
+.main-image-info {
     font-family: sans-serif;
     color: #77736e;
     font-size: .75em;
     text-align: center;
+}
+
+.main-video-hidden {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+.main-image-hidden {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+.main-video {
+    max-width:565px;
+    max-height:318px;
+    min-width:565px;
+    min-height:318px;
+    margin-left: 10px;
+}
+
+.main-image {
+    max-width:565px;
+    max-height:318px;
+    min-width:565px;
+    min-height:318px;
+    margin-left: 10px;
+}
+
+.main-image-info-hidden {
+    display: none;
 }

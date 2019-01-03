@@ -47,7 +47,7 @@ class App extends React.Component {
           }
         }
         populateImageArray();
-        //could instead reformat the database to seperate the response image data.
+        //could instead reformat the database to seperate the response image data if more than 6 photos
         this.setState({
           id: response.data.id,
           images: responseImages,
@@ -88,12 +88,7 @@ class App extends React.Component {
           <Images images={this.state.images} onMouseOver={this.onMouseOver}/>
           <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver}/>
         </div>
-        <MainFrame currentSelect={this.state.currentSelect} currentSelectType={this.state.currentSelectType}/>
-        {/* <div id="myModal" class="modal">
-          <span class="close">&times;</span>
-          <img class="modal-content" id="img01"></img>
-          <div id="caption"></div>
-        </div> */}
+        <MainFrame currentSelect={this.state.currentSelect} currentSelectType={this.state.currentSelectType} video={this.state.videoUrl}/>
       </div>
     );
   }

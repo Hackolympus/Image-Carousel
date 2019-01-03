@@ -133,7 +133,7 @@
 	          }
 	        }
 	        populateImageArray();
-	        //could instead reformat the database to seperate the response image data.
+	        //could instead reformat the database to seperate the response image data if more than 6 photos
 	        _this2.setState({
 	          id: response.data.id,
 	          images: responseImages,
@@ -183,7 +183,7 @@
 	          _react2.default.createElement(_images2.default, { images: this.state.images, onMouseOver: this.onMouseOver }),
 	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl, onMouseOver: this.onMouseOver })
 	        ),
-	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType })
+	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType, video: this.state.videoUrl })
 	      );
 	    }
 	  }]);
@@ -24306,7 +24306,7 @@
 	    props.images.map(function (img) {
 	      return _react2.default.createElement("img", { src: img, onMouseEnter: function onMouseEnter(e) {
 	          return props.onMouseOver(e);
-	        }, key: imgNum++ });
+	        }, key: "thumbnail_" + imgNum++ });
 	    })
 	  );
 	};
@@ -24342,7 +24342,8 @@
 	                src: "https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png",
 	                onMouseEnter: function onMouseEnter(e) {
 	                    return props.onMouseOver(e);
-	                }
+	                },
+	                key: "thumbnail_video"
 	            })
 	        );
 	    } //consider using a thumbnail instead of an iframe
@@ -24387,51 +24388,36 @@
 	    var _this = _possibleConstructorReturn(this, (MainFrame.__proto__ || Object.getPrototypeOf(MainFrame)).call(this, props));
 	
 	    _this.state = {
-	      isHovered: false,
-	      wasClicked: false
+	      isHovered: false
 	    };
-	    // this.zoom = this.zoom.bind(this);
 	    return _this;
 	  }
 	
 	  _createClass(MainFrame, [{
 	    key: "componentDidMount",
-	    value: function componentDidMount() {}
-	    //could mount the iframe video and hide it here for refactoring but skipping for now.
-	
-	
-	    //   zoom() {
-	    //     this.state.wasClicked ? 
-	    //   }
-	
+	    value: function componentDidMount() {
+	      //could mount the iframe video and hide it here for refactoring but skipping for now.
+	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _this2 = this;
 	
-	      if (this.props.currentSelectType === "image") {
-	        return _react2.default.createElement(
-	          "div",
-	          { id: "main-frame" },
-	          _react2.default.createElement("img", { className: "main-image", src: this.props.currentSelect, onMouseEnter: function onMouseEnter() {
-	              return _this2.setState({ isHovered: true });
-	            }, onMouseLeave: function onMouseLeave() {
-	              return _this2.setState({ isHovered: false });
-	            } }),
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            this.state.isHovered ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in"
-	          )
-	        );
-	      } else if (this.props.currentSelectType === "video") {
-	        //instead of else if make it so the video is default on hidden and only unhidden when the if statement is in effect.
-	        return _react2.default.createElement(
-	          "div",
-	          { id: "main-frame" },
-	          _react2.default.createElement("iframe", { src: this.props.currentSelect, frameBorder: "0" })
-	        );
-	      }
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "main-frame" },
+	        _react2.default.createElement("img", { className: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden", src: this.props.currentSelect, onMouseEnter: function onMouseEnter() {
+	            return _this2.setState({ isHovered: true });
+	          }, onMouseLeave: function onMouseLeave() {
+	            return _this2.setState({ isHovered: false });
+	          } }),
+	        _react2.default.createElement(
+	          "p",
+	          { className: this.props.currentSelectType === "image" ? "main-image-info" : "main-image-info-hidden" },
+	          this.state.isHovered === true ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in (not implemented yet)"
+	        ),
+	        _react2.default.createElement("iframe", { className: this.props.currentSelectType === "image" ? "main-video-hidden" : "main-video", src: this.props.video, frameBorder: "0" })
+	      );
 	    }
 	  }]);
 	
