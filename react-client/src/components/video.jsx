@@ -4,9 +4,10 @@ const Video = props => {
   if(props.video) {
     return (
         <div id="video">
-            <iframe
-                src={props.video}
-                key={props.video}
+            <img
+                id="video-thumbnail"
+                src="https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png"
+                onMouseEnter={(e) => props.onMouseOver(e)}
             />
         </div>
     );

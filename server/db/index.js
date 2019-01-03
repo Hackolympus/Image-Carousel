@@ -24,11 +24,11 @@ var randomObject = (data) => {
     corgiObj.image6Url = corgiPic6
   }
 
-  if (random >= 0.75) {
+  // if (random >= 0.9) {
     var corgiVid = data.videosOfCorgis[Math.floor(Math.random()*data.videosOfCorgis.length)];
   //  need a thumbnail isntead of a video for the video!!
     corgiObj.videoUrl = corgiVid
-  }
+  // }
   return corgiObj;
 }
 

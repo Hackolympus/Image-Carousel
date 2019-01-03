@@ -63,17 +63,17 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _images = __webpack_require__(/*! ./components/images.jsx */ 211);
+	var _images = __webpack_require__(/*! ./components/images.jsx */ 210);
 	
 	var _images2 = _interopRequireDefault(_images);
 	
-	var _video = __webpack_require__(/*! ./components/video.jsx */ 212);
+	var _video = __webpack_require__(/*! ./components/video.jsx */ 211);
 	
 	var _video2 = _interopRequireDefault(_video);
 	
-	var _mainImage = __webpack_require__(/*! ./components/mainImage.jsx */ 213);
+	var _mainFrame = __webpack_require__(/*! ./components/mainFrame.jsx */ 212);
 	
-	var _mainImage2 = _interopRequireDefault(_mainImage);
+	var _mainFrame2 = _interopRequireDefault(_mainFrame);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95,10 +95,13 @@
 	      id: "",
 	      images: [],
 	      videoUrl: null,
-	      currentListing: null
+	      currentListing: null,
+	      currentSelect: null,
+	      currentSelectType: "image"
 	    };
 	    _this.populateImages = _this.populateImages.bind(_this);
 	    _this.getRandomNumber = _this.getRandomNumber.bind(_this);
+	    _this.onMouseOver = _this.onMouseOver.bind(_this);
 	    return _this;
 	  }
 	
@@ -108,13 +111,13 @@
 	      var _this2 = this;
 	
 	      _axios2.default.get("/listing/" + this.state.currentListing).then(function (response) {
-	        console.log(response.data);
 	        _this2.setState({
 	          id: response.data.id,
 	          images: [response.data.image1Url, response.data.image2Url, response.data.image3Url, response.data.image4Url, response.data.image5Url, response.data.image6Url
 	          //iterate through the response data instead
 	          ],
-	          videoUrl: response.data.videoUrl
+	          videoUrl: response.data.videoUrl,
+	          currentSelect: response.data.image1Url
 	        }); //or do conditional rendering based on values!!!!
 	      }).catch(function (err) {
 	        console.log("Error populating images in client: ", err);
@@ -123,7 +126,20 @@
 	  }, {
 	    key: "getRandomNumber",
 	    value: function getRandomNumber() {
+	      //to get a random listing 1-100, not to be used in production
 	      return Math.floor(Math.random() * 100) + 1;
+	    }
+	  }, {
+	    key: "onMouseOver",
+	    value: function onMouseOver(e) {
+	      this.setState({
+	        currentSelect: e.target.src
+	      });
+	      if (e.target.id === "video-thumbnail") {
+	        this.setState({ currentSelectType: "video", currentSelect: this.state.videoUrl });
+	      } else if (e.target.tagName === "IMG") {
+	        this.setState({ currentSelectType: "image" });
+	      }
 	    }
 	  }, {
 	    key: "componentDidMount",
@@ -143,10 +159,21 @@
 	        _react2.default.createElement(
 	          "div",
 	          { id: "thumbnail-bar" },
-	          _react2.default.createElement(_images2.default, { images: this.state.images }),
-	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl })
+	          _react2.default.createElement(_images2.default, { images: this.state.images, onMouseOver: this.onMouseOver }),
+	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl, onMouseOver: this.onMouseOver })
 	        ),
-	        _react2.default.createElement(_mainImage2.default, null)
+	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType }),
+	        _react2.default.createElement(
+	          "div",
+	          { id: "myModal", "class": "modal" },
+	          _react2.default.createElement(
+	            "span",
+	            { "class": "close" },
+	            "\xD7"
+	          ),
+	          _react2.default.createElement("img", { "class": "modal-content", id: "img01" }),
+	          _react2.default.createElement("div", { id: "caption" })
+	        )
 	      );
 	    }
 	  }]);
@@ -24243,8 +24270,7 @@
 
 
 /***/ }),
-/* 210 */,
-/* 211 */
+/* 210 */
 /*!************************************************!*\
   !*** ./react-client/src/components/images.jsx ***!
   \************************************************/
@@ -24267,56 +24293,99 @@
 	    return _react2.default.createElement(
 	      "div",
 	      { id: "images" },
-	      props.images.map(function (img) {
-	        return _react2.default.createElement("img", { src: img, key: img });
-	      })
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[0] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[1] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[2] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[3] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[4] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[5] })
 	    );
 	  } else if (props.images[4]) {
 	    return _react2.default.createElement(
 	      "div",
 	      { id: "images" },
-	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
-	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
-	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] }),
-	      _react2.default.createElement("img", { src: props.images[3], key: props.images[3] }),
-	      _react2.default.createElement("img", { src: props.images[4], key: props.images[4] })
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[0] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[1] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[2] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[3] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[4] })
 	    );
 	  } else if (props.images[3]) {
 	    return _react2.default.createElement(
 	      "div",
 	      { id: "images" },
-	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
-	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
-	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] }),
-	      _react2.default.createElement("img", { src: props.images[3], key: props.images[3] })
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[0] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[1] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[2] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[3] })
 	    );
 	  } else if (props.images[2]) {
 	    return _react2.default.createElement(
 	      "div",
 	      { id: "images" },
-	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
-	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] }),
-	      _react2.default.createElement("img", { src: props.images[2], key: props.images[2] })
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[0] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[1] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[2] })
 	    );
 	  } else if (props.images[1]) {
 	    return _react2.default.createElement(
 	      "div",
 	      { id: "images" },
-	      _react2.default.createElement("img", { src: props.images[0], key: props.images[0] }),
-	      _react2.default.createElement("img", { src: props.images[1], key: props.images[1] })
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[0] }),
+	      _react2.default.createElement("img", { onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, src: props.images[1] })
 	    );
 	  }
 	  return _react2.default.createElement(
 	    "div",
 	    { id: "images" },
-	    _react2.default.createElement("img", { src: props.images[0], key: props.images[0] })
+	    _react2.default.createElement("img", { onMouseEnter: props.onMouseOver, src: props.images[0] })
 	  );
 	};
 	
 	exports.default = Images;
 
 /***/ }),
-/* 212 */
+/* 211 */
 /*!***********************************************!*\
   !*** ./react-client/src/components/video.jsx ***!
   \***********************************************/
@@ -24325,7 +24394,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _react = __webpack_require__(/*! react */ 1);
@@ -24335,32 +24404,35 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Video = function Video(props) {
-	  if (props.video) {
-	    return _react2.default.createElement(
-	      "div",
-	      { id: "video" },
-	      _react2.default.createElement("iframe", {
-	        src: props.video,
-	        key: props.video
-	      })
-	    );
-	  } //consider using a thumbnail instead of an iframe
-	  return _react2.default.createElement("div", { id: "video" });
+	    if (props.video) {
+	        return _react2.default.createElement(
+	            "div",
+	            { id: "video" },
+	            _react2.default.createElement("img", {
+	                id: "video-thumbnail",
+	                src: "https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png",
+	                onMouseEnter: function onMouseEnter(e) {
+	                    return props.onMouseOver(e);
+	                }
+	            })
+	        );
+	    } //consider using a thumbnail instead of an iframe
+	    return _react2.default.createElement("div", { id: "video" });
 	};
 	
 	exports.default = Video;
 
 /***/ }),
-/* 213 */
+/* 212 */
 /*!***************************************************!*\
-  !*** ./react-client/src/components/mainImage.jsx ***!
+  !*** ./react-client/src/components/mainFrame.jsx ***!
   \***************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24377,38 +24449,68 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var MainImage = function (_React$Component) {
-	    _inherits(MainImage, _React$Component);
+	var MainFrame = function (_React$Component) {
+	  _inherits(MainFrame, _React$Component);
 	
-	    function MainImage(props) {
-	        _classCallCheck(this, MainImage);
+	  function MainFrame(props) {
+	    _classCallCheck(this, MainFrame);
 	
-	        var _this = _possibleConstructorReturn(this, (MainImage.__proto__ || Object.getPrototypeOf(MainImage)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (MainFrame.__proto__ || Object.getPrototypeOf(MainFrame)).call(this, props));
 	
-	        _this.state = {};
-	        return _this;
+	    _this.state = {
+	      isHovered: false,
+	      wasClicked: false
+	    };
+	    // this.zoom = this.zoom.bind(this);
+	    return _this;
+	  }
+	
+	  _createClass(MainFrame, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {}
+	    //could mount the iframe video and hide it here for refactoring but skipping for now.
+	
+	
+	    //   zoom() {
+	    //     this.state.wasClicked ? 
+	    //   }
+	
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+	
+	      if (this.props.currentSelectType === "image") {
+	        return _react2.default.createElement(
+	          "div",
+	          { id: "main-frame" },
+	          _react2.default.createElement("img", { className: "main-image", src: this.props.currentSelect, onMouseEnter: function onMouseEnter() {
+	              return _this2.setState({ isHovered: true });
+	            }, onMouseLeave: function onMouseLeave() {
+	              return _this2.setState({ isHovered: false });
+	            } }),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            this.state.isHovered ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in"
+	          )
+	        );
+	      } else if (this.props.currentSelectType === "video") {
+	        return _react2.default.createElement(
+	          "div",
+	          { id: "main-frame" },
+	          _react2.default.createElement("iframe", { src: this.props.currentSelect, frameBorder: "0" })
+	        );
+	      }
 	    }
+	  }]);
 	
-	    _createClass(MainImage, [{
-	        key: "componentDidMount",
-	        value: function componentDidMount() {}
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            return _react2.default.createElement(
-	                "div",
-	                { id: "main-image" },
-	                _react2.default.createElement("img", { src: "https://media4.s-nbcnews.com/i/newscms/2018_11/1324333/corgi-fat-shame-today-180313-tease1_dd38fd2e279cadd6eadd7b45b1473e12.jpg" })
-	            );
-	        }
-	    }]);
-	
-	    return MainImage;
+	  return MainFrame;
 	}(_react2.default.Component);
 	
-	;
-	
-	exports.default = MainImage;
+	exports.default = MainFrame;
+	//was testing out some stuff but as of now this can be stateless
+	//find a way to make this work for both images and for iframes or find a new way to display videos.
 
 /***/ })
 /******/ ]);
