@@ -24299,14 +24299,14 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Images = function Images(props) {
-	
+	  var imgNum = 1;
 	  return _react2.default.createElement(
 	    "div",
 	    { id: "images" },
 	    props.images.map(function (img) {
 	      return _react2.default.createElement("img", { src: img, onMouseEnter: function onMouseEnter(e) {
 	          return props.onMouseOver(e);
-	        } });
+	        }, key: imgNum++ });
 	    })
 	  );
 	};
