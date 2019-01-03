@@ -19,12 +19,16 @@ var randomObject = (data) => {
   if (random >= 0.5) {
     var corgiPic5 = data.picturesOfCorgis[Math.floor(Math.random()*data.picturesOfCorgis.length)];
     var corgiPic6 = data.picturesOfCorgis[Math.floor(Math.random()*data.picturesOfCorgis.length)];
-    var corgiVid = data.videosOfCorgis[Math.floor(Math.random()*data.videosOfCorgis.length)];
 
     corgiObj.image5Url = corgiPic5
     corgiObj.image6Url = corgiPic6
-    corgiObj.videoUrl = corgiVid
   }
+
+  // if (random >= 0.9) {
+    var corgiVid = data.videosOfCorgis[Math.floor(Math.random()*data.videosOfCorgis.length)];
+  //  need a thumbnail isntead of a video for the video!!
+    corgiObj.videoUrl = corgiVid
+  // }
   return corgiObj;
 }
 

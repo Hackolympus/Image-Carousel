@@ -2,3 +2,5 @@
 node_modules/
 # Private information
 server/config.js 
+react-client/dist/bundle.js
+react-client/dist/bundle.js.map

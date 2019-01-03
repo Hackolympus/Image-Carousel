@@ -1,26 +1,50 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: lightcyan;
+#image-carousel {
+    transition: all 0.3s ease;
 }
 
-img {
-    align: left;
-    display: block;
-    max-width:150px;
-    max-height:100px;
-    min-width:150px;
-    min-height:100px;
-    width: auto;
-    height: auto;
-    padding: 1px;
-  }
+#thumbnail-bar {
+    float: left;
+}
 
-iframe {
+#main-frame {
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+}
+
+#thumbnail-bar img {
     align: left;
     display: block;
-    max-width:148px;
-    max-height:100px;
+    max-width:42px;
+    max-height:42px;
+    min-width:42px;
+    min-height:42px;
     width: auto;
     height: auto;
-    padding: 1px;
+    border: 1px solid rgba(109, 108, 108, 0.719);
+    margin-bottom: 10px;
+}
+
+#thumbnail-bar img:hover {
+    background: #fa7a1ec9;
+    border: 1px solid #fa7a1ec9;
+    box-shadow: 1px 1px 1px #fa7a1ec9;
+}
+
+#main-frame iframe, img {
+    display: block;
+    max-width:581px;
+    max-height:335px;
+    min-width:581px;
+    min-height:335px;
+    width: auto;
+    height: auto;
+    margin-left: 10px;
+}
+
+#main-frame p {
+    font-family: sans-serif;
+    color: #77736e;
+    font-size: .75em;
+    text-align: center;
 }

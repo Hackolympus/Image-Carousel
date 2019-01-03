@@ -63,6 +63,18 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
+	var _images = __webpack_require__(/*! ./components/images.jsx */ 210);
+	
+	var _images2 = _interopRequireDefault(_images);
+	
+	var _video = __webpack_require__(/*! ./components/video.jsx */ 211);
+	
+	var _video2 = _interopRequireDefault(_video);
+	
+	var _mainFrame = __webpack_require__(/*! ./components/mainFrame.jsx */ 212);
+	
+	var _mainFrame2 = _interopRequireDefault(_mainFrame);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83,10 +95,13 @@
 	      id: "",
 	      images: [],
 	      videoUrl: null,
-	      currentListing: null
+	      currentListing: null,
+	      currentSelect: null,
+	      currentSelectType: "image"
 	    };
 	    _this.populateImages = _this.populateImages.bind(_this);
 	    _this.getRandomNumber = _this.getRandomNumber.bind(_this);
+	    _this.onMouseOver = _this.onMouseOver.bind(_this);
 	    return _this;
 	  }
 	
@@ -96,20 +111,56 @@
 	      var _this2 = this;
 	
 	      _axios2.default.get("/listing/" + this.state.currentListing).then(function (response) {
-	        console.log(response.data);
+	        var responseImages = [];
+	        function populateImageArray() {
+	          if (response.data.image1Url !== null) {
+	            responseImages.push(response.data.image1Url);
+	          }
+	          if (response.data.image2Url !== null) {
+	            responseImages.push(response.data.image2Url);
+	          }
+	          if (response.data.image3Url !== null) {
+	            responseImages.push(response.data.image3Url);
+	          }
+	          if (response.data.image4Url !== null) {
+	            responseImages.push(response.data.image4Url);
+	          }
+	          if (response.data.image5Url !== null) {
+	            responseImages.push(response.data.image5Url);
+	          }
+	          if (response.data.image6Url !== null) {
+	            responseImages.push(response.data.image6Url);
+	          }
+	        }
+	        populateImageArray();
+	        //could instead reformat the database to seperate the response image data.
 	        _this2.setState({
 	          id: response.data.id,
-	          images: [response.data.image1Url, response.data.image2Url, response.data.image3Url, response.data.image4Url, response.data.image5Url, response.data.image6Url],
-	          videoUrl: response.data.videoUrl
-	        });
+	          images: responseImages,
+	          videoUrl: response.data.videoUrl,
+	          currentSelect: response.data.image1Url
+	        }); //or do conditional rendering based on values!!!!
 	      }).catch(function (err) {
-	        console.log('Error populating images in client: ', err);
+	        console.log("Error populating images in client: ", err);
 	      });
 	    }
 	  }, {
 	    key: "getRandomNumber",
 	    value: function getRandomNumber() {
+	      //to get a random listing 1-100, not to be used in production
 	      return Math.floor(Math.random() * 100) + 1;
+	    }
+	  }, {
+	    key: "onMouseOver",
+	    value: function onMouseOver(e) {
+	      this.setState({
+	        currentSelect: e.target.src
+	      });
+	      if (e.target.id === "video-thumbnail") {
+	        this.setState({ currentSelectType: "video", currentSelect: this.state.videoUrl });
+	      } else if (e.target.tagName === "IMG") {
+	        this.setState({ currentSelectType: "image" });
+	      }
 	    }
 	  }, {
 	    key: "componentDidMount",
@@ -126,11 +177,13 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { id: "image-carousel" },
-	        this.state.images.map(function (img) {
-	          return _react2.default.createElement("img", { src: img, key: img });
-	        }),
-	        _react2.default.createElement("iframe", { src: this.state.videoUrl, frameborder: "0", key: this.state.videoUrl,
-	          allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen: true })
+	        _react2.default.createElement(
+	          "div",
+	          { id: "thumbnail-bar" },
+	          _react2.default.createElement(_images2.default, { images: this.state.images, onMouseOver: this.onMouseOver }),
+	          _react2.default.createElement(_video2.default, { video: this.state.videoUrl, onMouseOver: this.onMouseOver })
+	        ),
+	        _react2.default.createElement(_mainFrame2.default, { currentSelect: this.state.currentSelect, currentSelectType: this.state.currentSelectType })
 	      );
 	    }
 	  }]);
@@ -24225,6 +24278,169 @@
 	  };
 	};
 
+
+/***/ }),
+/* 210 */
+/*!************************************************!*\
+  !*** ./react-client/src/components/images.jsx ***!
+  \************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Images = function Images(props) {
+	  var imgNum = 1;
+	  return _react2.default.createElement(
+	    "div",
+	    { id: "images" },
+	    props.images.map(function (img) {
+	      return _react2.default.createElement("img", { src: img, onMouseEnter: function onMouseEnter(e) {
+	          return props.onMouseOver(e);
+	        }, key: imgNum++ });
+	    })
+	  );
+	};
+	
+	exports.default = Images;
+
+/***/ }),
+/* 211 */
+/*!***********************************************!*\
+  !*** ./react-client/src/components/video.jsx ***!
+  \***********************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Video = function Video(props) {
+	    if (props.video) {
+	        return _react2.default.createElement(
+	            "div",
+	            { id: "video" },
+	            _react2.default.createElement("img", {
+	                id: "video-thumbnail",
+	                src: "https://images-na.ssl-images-amazon.com/images/I/21LlmxUCtTS.SS40_BG85,85,85_BR-120_PKdp-play-icon-overlay__.png",
+	                onMouseEnter: function onMouseEnter(e) {
+	                    return props.onMouseOver(e);
+	                }
+	            })
+	        );
+	    } //consider using a thumbnail instead of an iframe
+	    return _react2.default.createElement("div", { id: "video" });
+	};
+	
+	exports.default = Video;
+
+/***/ }),
+/* 212 */
+/*!***************************************************!*\
+  !*** ./react-client/src/components/mainFrame.jsx ***!
+  \***************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MainFrame = function (_React$Component) {
+	  _inherits(MainFrame, _React$Component);
+	
+	  function MainFrame(props) {
+	    _classCallCheck(this, MainFrame);
+	
+	    var _this = _possibleConstructorReturn(this, (MainFrame.__proto__ || Object.getPrototypeOf(MainFrame)).call(this, props));
+	
+	    _this.state = {
+	      isHovered: false,
+	      wasClicked: false
+	    };
+	    // this.zoom = this.zoom.bind(this);
+	    return _this;
+	  }
+	
+	  _createClass(MainFrame, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {}
+	    //could mount the iframe video and hide it here for refactoring but skipping for now.
+	
+	
+	    //   zoom() {
+	    //     this.state.wasClicked ? 
+	    //   }
+	
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+	
+	      if (this.props.currentSelectType === "image") {
+	        return _react2.default.createElement(
+	          "div",
+	          { id: "main-frame" },
+	          _react2.default.createElement("img", { className: "main-image", src: this.props.currentSelect, onMouseEnter: function onMouseEnter() {
+	              return _this2.setState({ isHovered: true });
+	            }, onMouseLeave: function onMouseLeave() {
+	              return _this2.setState({ isHovered: false });
+	            } }),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            this.state.isHovered ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in"
+	          )
+	        );
+	      } else if (this.props.currentSelectType === "video") {
+	        //instead of else if make it so the video is default on hidden and only unhidden when the if statement is in effect.
+	        return _react2.default.createElement(
+	          "div",
+	          { id: "main-frame" },
+	          _react2.default.createElement("iframe", { src: this.props.currentSelect, frameBorder: "0" })
+	        );
+	      }
+	    }
+	  }]);
+	
+	  return MainFrame;
+	}(_react2.default.Component);
+	
+	exports.default = MainFrame;
+	//was testing out some stuff but as of now this can be stateless
+	//find a way to make this work for both images and for iframes or find a new way to display videos.
 
 /***/ })
 /******/ ]);
