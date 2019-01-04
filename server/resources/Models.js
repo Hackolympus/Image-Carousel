@@ -1,13 +1,18 @@
 
 var Sequelize = require("sequelize");
-var mysqlConfig = require("../config.js").mysqlConfig;
+var mysqlConfig = {
+  host     : process.env.HOST,
+  user     : process.env.USER,
+  password : process.env.PASSWORD,
+  database : process.env.DATABASE
+}
 
 const sequelize = new Sequelize(
   mysqlConfig.database,
   mysqlConfig.user,
   mysqlConfig.password,
   {
-    host: 'localhost',
+    host: process.env.HOST,
     dialect: "mysql",
     define: {
       timestamps: false

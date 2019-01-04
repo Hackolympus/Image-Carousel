@@ -1,5 +1,10 @@
 var mysql = require('mysql');
-var mysqlConfig = require('../config.js').mysqlConfig;
+var mysqlConfig = {
+  host     : process.env.HOST,
+  user     : process.env.USER,
+  password : process.env.PASSWORD,
+  database : process.env.DATABASE
+}
 var testData = require('../../data/exampleData.js');
 var insertCorgi = require('../seed.js');
 
