@@ -8,11 +8,11 @@ import MainFrame from "./components/mainFrame.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: "",
+    this.state = { //in production refactor this. do not currentListing
+      id: "", 
       images: [],
       videoUrl: null,
-      currentListing: null,
+      currentListing: null, //the random listing
       currentSelect: null,
       currentSelectType: null
     };
@@ -47,14 +47,13 @@ class App extends React.Component {
           }
         }
         populateImageArray();
-        //could instead reformat the database to seperate the response image data if more than 6 photos
         this.setState({
           id: response.data.id,
           images: responseImages,
           videoUrl: response.data.videoUrl,
           currentSelect: response.data.image1Url,
           currentSelectType: "image"
-        }); //or do conditional rendering based on values!!!!
+        });
       })
       .catch(err => {
         console.log("Error populating images in client: ", err);

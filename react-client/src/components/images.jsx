@@ -2,7 +2,7 @@ import React from "react";
 
 const Images = props => {
   var imgNum = 1;
-  return (
+  return ( //could refactor to hide this to reduce rendering time.
     <div id="images">
       {props.images.map(img => {
         return (
