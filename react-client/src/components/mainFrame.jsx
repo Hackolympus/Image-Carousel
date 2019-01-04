@@ -1,42 +1,81 @@
 import React from "react";
+import ReactImageMagnify from "react-image-magnify";
 
 class MainFrame extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHovered: false,
-      wasClicked: false
+      isHovered: false
     };
-    // this.zoom = this.zoom.bind(this);
+    this.checkCurrentSelect = this.checkCurrentSelect.bind(this);
   }
 
-  componentDidMount() {
-    //could mount the iframe video and hide it here for refactoring but skipping for now.
-  }
-
-//   zoom() {
-//     this.state.wasClicked ? 
-//   }
-
-  render() {
+  checkCurrentSelect() {
     if (this.props.currentSelectType === "image") {
       return (
-        <div id="main-frame">
-          <img className="main-image" src={this.props.currentSelect} onMouseEnter={() => this.setState({isHovered: true})} onMouseLeave={() => this.setState({isHovered: false})}/>
-          <p>{this.state.isHovered ? "Click image to open expanded view (not implemented yet)" : "Roll over image to zoom in"}</p>
-        </div>
-      );
-    } else if (this.props.currentSelectType === "video") {
-    //instead of else if make it so the video is default on hidden and only unhidden when the if statement is in effect.
-      return (
-        <div id="main-frame">
-          <iframe src={this.props.currentSelect} frameBorder="0" />
-        </div>
+        <ReactImageMagnify
+          fadeDurationInMs={0}
+          hoverDelayInMs={0}
+          style={{ cursor: "default" }}
+          {...{
+            smallImage: {
+              height: 300,
+              alt: "Main image media",
+              width: 320,
+              src: this.props.currentSelect
+            },
+            largeImage: {
+              src: this.props.currentSelect,
+              width: 1200,
+              height: 1800
+            }
+          }}
+        />
       );
     }
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return (
+      <div id="main-frame">
+        <div
+          className={
+            this.props.currentSelectType === "image"
+              ? "main-image"
+              : "hidden-media"
+          }
+          onMouseEnter={() => this.setState({ isHovered: true })}
+          onMouseLeave={() => this.setState({ isHovered: false })}
+        >
+          {this.checkCurrentSelect()}
+        </div>
+        <p
+          className={
+            this.props.currentSelectType === "image"
+              ? "main-image-info"
+              : "main-image-info-hidden"
+          }
+        >
+          {this.state.isHovered === true
+            ? "Click image to open expanded view" //still need to add this modal
+            : "Roll over image to zoom in"}
+        </p>
+        <iframe
+          className={
+            this.props.currentSelectType === "image"
+              ? "hidden-media"
+              : "main-video"
+          }
+          src={this.props.video}
+          frameBorder="0"
+          alt="Main video media"
+          allowFullScreen
+        />
+      </div>
+    );
   }
 }
 
 export default MainFrame;
-//was testing out some stuff but as of now this can be stateless
-//find a way to make this work for both images and for iframes or find a new way to display videos.

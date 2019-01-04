@@ -8,13 +8,13 @@ import MainFrame from "./components/mainFrame.jsx";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: "",
+    this.state = { //in production refactor this. do not currentListing
+      id: "", 
       images: [],
       videoUrl: null,
-      currentListing: null,
+      currentListing: null, //the random listing
       currentSelect: null,
-      currentSelectType: "image"
+      currentSelectType: null
     };
     this.populateImages = this.populateImages.bind(this);
     this.getRandomNumber = this.getRandomNumber.bind(this);
@@ -27,40 +27,41 @@ class App extends React.Component {
       .then(response => {
         var responseImages = [];
         function populateImageArray() {
-          if(response.data.image1Url !== null) {
+          if (response.data.image1Url !== null) {
             responseImages.push(response.data.image1Url);
           }
-          if(response.data.image2Url !== null) {
+          if (response.data.image2Url !== null) {
             responseImages.push(response.data.image2Url);
           }
-          if(response.data.image3Url !== null) {
+          if (response.data.image3Url !== null) {
             responseImages.push(response.data.image3Url);
           }
-          if(response.data.image4Url !== null) {
+          if (response.data.image4Url !== null) {
             responseImages.push(response.data.image4Url);
           }
-          if(response.data.image5Url !== null) {
+          if (response.data.image5Url !== null) {
             responseImages.push(response.data.image5Url);
           }
-          if(response.data.image6Url !== null) {
+          if (response.data.image6Url !== null) {
             responseImages.push(response.data.image6Url);
           }
         }
         populateImageArray();
-        //could instead reformat the database to seperate the response image data.
         this.setState({
           id: response.data.id,
           images: responseImages,
           videoUrl: response.data.videoUrl,
-          currentSelect: response.data.image1Url
-        }); //or do conditional rendering based on values!!!!
+          currentSelect: response.data.image1Url,
+          currentSelectType: "image"
+        });
       })
       .catch(err => {
         console.log("Error populating images in client: ", err);
       });
   }
 
-  getRandomNumber() { //to get a random listing 1-100, not to be used in production
+  getRandomNumber() {
+    //to get a random listing 1-100, not to be used in production
     return Math.floor(Math.random() * 100) + 1;
   }
 
@@ -69,9 +70,12 @@ class App extends React.Component {
       currentSelect: e.target.src
     });
     if (e.target.id === "video-thumbnail") {
-      this.setState({currentSelectType: "video", currentSelect: this.state.videoUrl});
-    } else if(e.target.tagName === "IMG") {
-      this.setState({currentSelectType: "image"});
+      this.setState({
+        currentSelectType: "video",
+        currentSelect: this.state.videoUrl
+      });
+    } else if (e.target.tagName === "IMG") {
+      this.setState({ currentSelectType: "image" });
     }
   }
 
@@ -85,15 +89,15 @@ class App extends React.Component {
     return (
       <div id="image-carousel">
         <div id="thumbnail-bar">
-          <Images images={this.state.images} onMouseOver={this.onMouseOver}/>
-          <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver}/>
+          <Images images={this.state.images} onMouseOver={this.onMouseOver} />
+          <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver} />
+          {/* Instead of a single function, should I create two (specific to the type?) */}
         </div>
-        <MainFrame currentSelect={this.state.currentSelect} currentSelectType={this.state.currentSelectType}/>
-        {/* <div id="myModal" class="modal">
-          <span class="close">&times;</span>
-          <img class="modal-content" id="img01"></img>
-          <div id="caption"></div>
-        </div> */}
+        <MainFrame
+          currentSelect={this.state.currentSelect}
+          currentSelectType={this.state.currentSelectType}
+          video={this.state.videoUrl}
+        />
       </div>
     );
   }
