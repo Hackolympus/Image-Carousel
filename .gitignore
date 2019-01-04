@@ -1,6 +1,6 @@
 # Excess
 node_modules/
 # Private information
-server/config.js 
+server/config.js
+# Bundling 
 react-client/dist/bundle.js
-react-client/dist/bundle.js.map

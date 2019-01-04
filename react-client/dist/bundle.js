@@ -24423,8 +24423,6 @@
 	    value: function checkCurrentSelect() {
 	      if (this.props.currentSelectType === "image") {
 	        return _react2.default.createElement(_reactImageMagnify2.default, _extends({
-	          imageClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
-	          enlargedImageContainerClassName: this.props.currentSelectType === "image" ? "main-image" : "main-image-hidden",
 	          fadeDurationInMs: 0,
 	          hoverDelayInMs: 0,
 	          style: { cursor: "default" }
@@ -24479,7 +24477,8 @@
 	          className: this.props.currentSelectType === "image" ? "hidden-media" : "main-video",
 	          src: this.props.video,
 	          frameBorder: "0",
-	          alt: "Main video media"
+	          alt: "Main video media",
+	          allowFullScreen: true
 	        })
 	      );
 	    }

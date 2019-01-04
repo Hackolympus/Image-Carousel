@@ -14,16 +14,6 @@ class MainFrame extends React.Component {
     if (this.props.currentSelectType === "image") {
       return (
         <ReactImageMagnify
-          imageClassName={
-            this.props.currentSelectType === "image"
-              ? "main-image"
-              : "main-image-hidden"
-          }
-          enlargedImageContainerClassName={
-            this.props.currentSelectType === "image"
-              ? "main-image"
-              : "main-image-hidden"
-          }
           fadeDurationInMs={0}
           hoverDelayInMs={0}
           style={{ cursor: "default" }}
@@ -81,6 +71,7 @@ class MainFrame extends React.Component {
           src={this.props.video}
           frameBorder="0"
           alt="Main video media"
+          allowFullScreen
         />
       </div>
     );
