@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
   mysqlConfig.user,
   mysqlConfig.password,
   {
-    host: process.env.HOST,
+    host: mysqlConfig.host,
     dialect: "mysql",
     define: {
       timestamps: false
