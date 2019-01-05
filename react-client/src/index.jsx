@@ -5,7 +5,7 @@ import Images from "./components/images.jsx";
 import Video from "./components/video.jsx";
 import MainFrame from "./components/mainFrame.jsx";
 
-class App extends React.Component {
+class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = { //in production refactor this. do not currentListing
@@ -103,4 +103,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("carousel"));
+ReactDOM.render(<Carousel />, document.getElementById("carousel"));
