@@ -23,7 +23,6 @@ module.exports = {
         "https://www.youtube.com/embed/oVXZTmi2ruI",
         "https://www.youtube.com/embed/nu77ETGoxAY",
         "https://www.youtube.com/embed/XAkf4B_Ff3M",
-        "https://www.youtube.com/embed/4gZT758OsOA",
-        "https://www.youtube.com/embed/bjl3SB62X_8"
+        "https://www.youtube.com/embed/4gZT758OsOA"
     ]
 }

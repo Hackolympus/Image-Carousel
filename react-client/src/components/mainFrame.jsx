@@ -70,7 +70,7 @@ class MainFrame extends React.Component {
             ? "Click image to open expanded view" //still need to add this modal
             : "Roll over image to zoom in"}
         </p>
-        <iframe
+        <iframe //consider switching to a video instead of iframe
           className={
             this.props.currentSelectType === "image"
               ? "hidden-media"
