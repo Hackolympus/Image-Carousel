@@ -89,7 +89,6 @@ class Carousel extends React.Component {
   render() {
     return (
       <div id="image-carousel">
-        <h1>Image-Carousel</h1>
         <div id="thumbnail-bar">
           <Images images={this.state.images} onMouseOver={this.onMouseOver} />
           <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver} />
