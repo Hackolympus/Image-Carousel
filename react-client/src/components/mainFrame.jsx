@@ -8,6 +8,7 @@ class MainFrame extends React.Component {
       isHovered: false
     };
     this.checkCurrentSelect = this.checkCurrentSelect.bind(this);
+    this.createVideoClasses = this.createVideoClasses.bind(this);
   }
 
   checkCurrentSelect() {
@@ -34,6 +35,13 @@ class MainFrame extends React.Component {
       );
     }
   }
+
+  // createVideoClasses() {
+  //   var videoClasses = "";
+  //   this.props.currentSelectType === "image" ? videoClasses += "main-image" : videoClasses += "hidden-media";
+  //   !this.props.video ? " hidden" : "";
+  //   return videoClasses;
+  // } potential solution to class problems
 
   componentDidMount() {}
 
