@@ -60,7 +60,7 @@ connection.connect(err => {
     console.error("error connecting: " + err.stack);
     return;
   }
-  console.log("Successfully connected to database.");
+  console.log("Successfully connected to database: " + process.env.RDS_HOSTNAME);
   // for (let i = 1; i <= 100; i++) {
   //   insertCorgi(randomObject(testData), i);
   // } //seeder see below
