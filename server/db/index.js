@@ -61,9 +61,9 @@ connection.connect(err => {
     return;
   }
   console.log("Successfully connected to database.");
-  for (let i = 1; i <= 100; i++) {
-    insertCorgi(randomObject(testData), i);
-  } //seeder see below
+  // for (let i = 1; i <= 100; i++) {
+  //   insertCorgi(randomObject(testData), i);
+  // } //seeder see below
 });
 
 module.exports = connection;
