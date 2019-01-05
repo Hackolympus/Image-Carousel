@@ -30,10 +30,8 @@
 }
 
 .main-video {
-    min-width: 0px;
-    min-height: 0px;
-    max-width: 320px;
-    max-height: 180px;
+    width: 320px;
+    height: 180px;
 }
 
 .main-image {

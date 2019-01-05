@@ -8,6 +8,7 @@ class MainFrame extends React.Component {
       isHovered: false
     };
     this.checkCurrentSelect = this.checkCurrentSelect.bind(this);
+
   }
 
   checkCurrentSelect() {
