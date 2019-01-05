@@ -14,7 +14,12 @@ const sequelize = new Sequelize(
   mysqlConfig.password,
   {
     host: mysqlConfig.host,
+    port: mysqlConfig.port,
+    logging: console.log,
     dialect: "mysql",
+    dialectOptions: {
+      ssl:'Amazon RDS'
+    },
     define: {
       timestamps: false
     }
