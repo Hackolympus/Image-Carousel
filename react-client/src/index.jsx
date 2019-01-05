@@ -17,7 +17,7 @@ class Carousel extends React.Component {
       currentSelectType: null
     };
     this.populateImages = this.populateImages.bind(this);
-    this.getRandomNumber = this.getRandomNumber.bind(this);
+    this.getListing = this.getListing.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
   }
 
@@ -60,9 +60,10 @@ class Carousel extends React.Component {
       });
   }
 
-  getRandomNumber() {
+  getListing() {
     //to get a random listing 1-100, not to be used in production
-    return Math.floor(Math.random() * 100) + 1;
+    var listing = document.URL.split("?")[1];
+    return listing;
   }
 
   onMouseOver(e) {
@@ -80,7 +81,7 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ currentListing: this.getRandomNumber() }, () => {
+    this.setState({ currentListing: this.getListing() }, () => {
       this.populateImages();
     });
   }
@@ -91,7 +92,7 @@ class Carousel extends React.Component {
         <div id="thumbnail-bar">
           <Images images={this.state.images} onMouseOver={this.onMouseOver} />
           <Video video={this.state.videoUrl} onMouseOver={this.onMouseOver} />
-          {/* Instead of a single function, should I create two (specific to the type?) */}
+          {/* Instead of a single function, should I create two (specific to the type for each mouseover?)*/}
         </div>
         <MainFrame
           currentSelect={this.state.currentSelect}
