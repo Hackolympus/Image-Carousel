@@ -1,13 +1,3 @@
-This is the image carousel component for the Jeff's List website.
-
-Requires a few environmental variables on hosting ec2 instance.
-
-export RDS_HOSTNAME=”ec2PublicDNS”;
-export RDS_USERNAME=”databaseUsername”;
-export RDS_PASSWORD=”databasePassword”;
-export RDS_PORT=int (port for RDS);
-export RDS_DATABASE=”nameOfDatabase”;
-export PORT=int (port for ec2).
 # Local Market Website
 
 This is the image carousel component for the Jeff's List Site.
@@ -41,6 +31,7 @@ npm install
 npm run build
 npm run set-port (only works for linux machines to forward the default port 80 to direct to port 9003)
 npm run start (uses PM2 and can be stopped with 'npm run stop')
+(optional) export PORT="port express server is hosted on"
 ```
 
 ## Deployment
@@ -51,8 +42,8 @@ The default connection to the database uses the root user as well as no password
 You may manipulate these variables by adding the following environment variables:
 
 ```
-RDS_HOST="databaseUrl"
-RDS_USER="databaseUser"
+RDS_HOSTNAME="databaseUrl"
+RDS_USERNAME="databaseUser"
 RDS_PASSWORD="databasePassword"
 RDS_PORT="databasePort"
 ```
