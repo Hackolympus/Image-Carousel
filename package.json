@@ -10,7 +10,7 @@
   },
   "author": "Jonathan Raitses",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.15.2",
