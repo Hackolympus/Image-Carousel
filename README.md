@@ -50,7 +50,11 @@ DB_PASS="Database Password"
 DB_NAME="Database Name"
 ```
 
-You can also optionally spin up docker containers on your service hosts. Adjust the above environment variables in Dockerfile first.
+You can also optionally spin up docker containers on your service hosts. Adjust the above environment variables in Dockerfile first. Otherwise, to run on your own node, run:
+
+```
+npm run start
+```
 
 ## Running-the-tests
 
