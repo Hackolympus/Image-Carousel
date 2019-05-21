@@ -24,7 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Installing
 
 Make sure the machine you are running the server on has node installed.
-The default connection to the server uses localhost at port 9003.
+The default connection to the server uses localhost at port 9003. You can change this by adding an environment variable called PORT to set the port.
 
 Else comment out the first line in server/server.js (require("newrelic"))
 
@@ -94,6 +94,7 @@ Tests are run using jest. Currently under work, testing will be added soon.
 * Babel
 * Webpack
 * PM2
+* Cors
 * Body-parser
 * Morgan
 * Compression
