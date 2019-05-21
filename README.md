@@ -96,7 +96,7 @@ Tests are run using jest. Currently under work, testing will be added soon.
 * 1.0
   * Current Working Build
   * See [commit change](https://github.com/Hackolympus/Image-Carousel-Component/commit/d37d094328b2be942ccf4e7dfbfd2d64cd60bc9d)
- * 0.0
+* 0.0
   * Skeleton Build
   * See [commit change](https://github.com/Hackolympus/Image-Carousel-Component/commit/1aa4a9930904c079e49ee722c6bafaa9d44b5c38)
 
