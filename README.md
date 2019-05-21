@@ -50,25 +50,13 @@ DB_PASS="Database Password"
 DB_NAME="Database Name"
 ```
 
-If you would like to use newrelic for data metrics on what requests users are making to the server:
-```
-set environment variable newrelic="newrelic key"
-```
-
 You can also optionally spin up docker containers on your service hosts. Adjust the above environment variables in Dockerfile first.
 
 ## Running-the-tests
 
 ### Stress-Test
 
-You can look at New Relic to metrics if you enabled it.
-
-You can also use Artillery if you prefer it over New Relic which will display in terminal:
-
-```
-Adjust the target url in stress.yml to your host service url, and adjust the duration and arrival rate.
-artillery run stress.yml
-```
+newRelic will be added in the future.
 
 ### Breakdown
 
@@ -93,31 +81,28 @@ Tests are run using jest. Currently under work, testing will be added soon.
 * Jest
 * Babel
 * Webpack
-* PM2
+* Nodemon
 * Cors
 * Body-parser
 * Morgan
 * Compression
 * Docker
 * NewRelic
-* Artillery
 * AWS
 * Faker
-* Html-Webpack-Plugin
 
 ## Version-History
 
-* 2.0
-  * Current working version with proxy, docker containers, load balancing, metrics, and upgraded queries.
-  * See [commit change](https://github.com/Cherry-OnTop/Critics/commit/7947b972d8cf0aceb9f6889642ae1a132efebfd6)
 * 1.0
-  * Legacy code base from [Cbenz88](https://github.com/Cbenz88)
-  * See [commit change](https://github.com/Cherry-OnTop/Critics/commit/b3995c2f4b6dac6014d4b1c385dbf2e91f0fd850)
+  * Current Working Build
+  * See [commit change](https://github.com/Hackolympus/Image-Carousel-Component/commit/d37d094328b2be942ccf4e7dfbfd2d64cd60bc9d)
+ * 0.0
+  * Skeleton Build
+  * See [commit change](https://github.com/Hackolympus/Image-Carousel-Component/commit/1aa4a9930904c079e49ee722c6bafaa9d44b5c38)
 
 ## Authors
 
 * **Jonathan Raitses** - [Jonathan-Raitses](https://github.com/jonathan-raitses)
-* **Charlie Bencivenga** - [Cbenz88](https://github.com/Cbenz88)
 
 See also the list of [contributors](https://github.com/Cherry-OnTop/Critics/graphs/contributors) who participated in this project.
 
